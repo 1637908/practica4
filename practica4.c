@@ -8,7 +8,7 @@
 
 char *getField( int fn, char line[], char field[] ){
 	int i;
-	char *p, aux[256];
+	char *p, aux[10000];
 	
 	strcpy(aux, line );
 	p = strtok( aux, "," );
@@ -19,11 +19,12 @@ char *getField( int fn, char line[], char field[] ){
 
 int main(int argc, char** argv){
 	int fitxer,i=0, col=1,pointer;
+	int total_linies=0;
 	int top_l=0, top_dl=0;
 	int top1=0, top2=0, top3=0, aux=0, aux1=0,aux2=0;
 	float v=0,l=0,dl=0; //visualizaciones, likes, dislikes
 	char c;
-	char sortida1[10000],sortida2[10000],sortida3[10000]; //a la funció getField l'array sortida es guarda el camp que volem
+	char sortida1[10000],sortida2[10000],sortida3[10000],sortida4[10000]; //a la funció getField l'array sortida es guarda el camp que volem
 	char views[1000], likes[1000], dislikes[1000];
 	char buf[10000];//buf és un guardem la sortida
 	char topl_buf[10000],topdl_buf[10000];
@@ -54,9 +55,12 @@ int main(int argc, char** argv){
 				getField(11, buf, sortida1);
 				getField(12, buf, sortida2);
 				getField(13, buf, sortida3);
-				if (((strcmp(sortida1, "True")==0 || strcmp(sortida1,"False")==0)) || (((strcmp(sortida2, "False"))==0) && ((strcmp(sortida3, "False"))==0))){
+				getField(4, buf, sortida4);
+				if ((((strcmp(sortida1, "True")==0 || strcmp(sortida1,"False")==0)) || ((strcmp(sortida2, "True"))==1) || ((strcmp(sortida3, "True"))==1)) && (strcmp(sortida4, "1")==0)){
 
 					//printf("%s", buf);	
+					
+					total_linies++;
 				
 					getField(7, buf, views);
 					v += atoi(views);
@@ -67,7 +71,7 @@ int main(int argc, char** argv){
 						top2 = aux1;
 						top1 = atoi(views);
 						
-						 for (int i=0; i<sizeof(buf); i++){
+						for (int i=0; i<sizeof(buf); i++){
 							top_buf1[i] = buf[i];	
 						}
 						
@@ -120,15 +124,15 @@ int main(int argc, char** argv){
 		
 	}
 	const char *mit1= "La mitjana de visualitzacions és:";
-	v = v/35585;
+	v = v/total_linies;
 	char vv[100];
 	gcvt(v, 13, vv);
 	const char *mit2= "La mitjana de likes és:";
-	l = l/35585;
+	l = l/total_linies;
 	char ll[100];
 	gcvt(l, 13, ll);
 	const char *mit3= "La mitjana de dislikes és:";
-	dl = dl/35585;
+	dl = dl/total_linies;
 	char dldl[100];
 	gcvt(dl, 13, dldl);
 	
@@ -178,62 +182,62 @@ int main(int argc, char** argv){
 	
 	write(resultat,mit1,strlen(mit1));
 	write(resultat,y,strlen(y));
-	write(resultat,vv,7);
+	write(resultat,vv,strlen(vv));
 	write(resultat,y,strlen(y));
 	write(resultat,mit2,strlen(mit2));
 	write(resultat,y,strlen(y));
-	write(resultat,ll, 12);
+	write(resultat,ll, strlen(ll));
 	write(resultat,y,strlen(y));
 	write(resultat,mit3,strlen(mit3));
 	write(resultat,y,strlen(y));
-	write(resultat,dldl,13);
+	write(resultat,dldl,strlen(dldl));
 	write(resultat,y,strlen(y));
 	
 	write(resultat,mit6,strlen(mit6));
 	write(resultat,y,strlen(y));
-	write(resultat,t1,52);
+	write(resultat,t1,strlen(t1));
 	write(resultat,z,strlen(z));
-	write(resultat,v1,9);
+	write(resultat,v1,strlen(v1));
 	write(resultat,y,strlen(y));
 	
 	write(resultat,mit7,strlen(mit7));
 	write(resultat,y,strlen(y));
-	write(resultat,t2,57);
+	write(resultat,t2,strlen(t2));
 	write(resultat,z,strlen(z));
-	write(resultat,v2,8);
+	write(resultat,v2,strlen(v2));
 	write(resultat,y,strlen(y));
 	
 	write(resultat,mit8,strlen(mit8));
 	write(resultat,y,strlen(y));
-	write(resultat,t3,38);
+	write(resultat,t3,strlen(t3));
 	write(resultat,z,strlen(z));
-	write(resultat,v3,8);
+	write(resultat,v3,strlen(v3));
 	write(resultat,y,strlen(y));
 	
 	write(resultat,mit4,strlen(mit4));
 	write(resultat,y,strlen(y));
-	write(resultat, titol, 47);
+	write(resultat, titol, strlen(titol));
 	write(resultat,z,strlen(z));
-	write(resultat,publish_time,18);
+	write(resultat,publish_time,strlen(publish_time));
 	write(resultat,z,strlen(z));
-	write(resultat,num_v,8);
+	write(resultat,num_v,strlen(num_v));
 	write(resultat,z,strlen(z));
-	write(resultat,lk,7);
+	write(resultat,lk,strlen(lk));
 	write(resultat,z,strlen(z));
-	write(resultat,dlk,6);
+	write(resultat,dlk,strlen(dlk));
 	write(resultat,y,strlen(y));
 	
 	write(resultat,mit5,strlen(mit5));
 	write(resultat,y,strlen(y));
-	write(resultat, titol1, 52);
+	write(resultat, titol1, strlen(titol1));
 	write(resultat,z,strlen(z));
-	write(resultat,publish_time1,18);
+	write(resultat,publish_time1,strlen(publish_time1));
 	write(resultat,z,strlen(z));
-	write(resultat,num_v1,9);
+	write(resultat,num_v1,strlen(num_v1));
 	write(resultat,z,strlen(z));
-	write(resultat,lk1,7);
+	write(resultat,lk1,strlen(lk1));
 	write(resultat,z,strlen(z));
-	write(resultat,dlk1,6);
+	write(resultat,dlk1,strlen(dlk1));
 	
 	
 	close(resultat);
